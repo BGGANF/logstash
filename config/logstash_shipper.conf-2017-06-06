@@ -1,0 +1,17 @@
+input {
+	file 
+	{
+    		type => "AG nginx access log"
+       		path => ["/home/docker/log/nginx/8081.a.log"]
+       		start_position => "end"
+    	}
+}
+output{
+    	redis 
+	{
+        	host => "192.168.3.34" #redis server
+		port => 6379
+            	data_type => "list"
+            	key => "logstash:redis"
+    	}
+}
